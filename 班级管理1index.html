@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>🏗️ 筑梦毕业班 · 建筑职教 · 2314班</title>
+    <!-- Font Awesome 6 (免费图标库) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+        }
+
+        /* 蓝紫渐变色系 — 青春活力 */
+        body {
+            background: linear-gradient(145deg, #e0e9ff 0%, #f0e3ff 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem 1rem 5rem 1rem;
+        }
+
+        /* 整体卡片容器 */
+        .site-container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(2px);
+            border-radius: 40px 40px 24px 24px;
+            box-shadow: 0 20px 40px rgba(80, 60, 160, 0.2);
+            overflow: hidden;
+            padding: 1.2rem 1rem 1rem 1rem;
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+
+        /* 页面导航 tab */
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.4rem;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 0.8rem 0.4rem;
+            border-radius: 60px;
+            margin-bottom: 1.8rem;
+            border: 1px solid white;
+            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.15);
+        }
+
+        .tab-btn {
+            flex: 1 0 auto;
+            min-width: 60px;
+            background: transparent;
+            border: none;
+            padding: 0.6rem 0.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: #3b2b5c;
+            transition: 0.2s;
+            white-space: nowrap;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .tab-btn i {
+            font-size: 1rem;
+            display: block;
+            margin: 0 auto 4px;
+            color: #5b3e9b;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #7f5af0, #b47cff);
+            color: white;
+            border: 1px solid white;
+            box-shadow: 0 8px 16px #a07dd0;
+        }
+        .tab-btn.active i {
+            color: white;
+        }
+
+        /* 页面容器 — 显示隐藏 */
+        .page {
+            display: none;
+            animation: fade 0.3s ease;
+        }
+        .page.active-page {
+            display: block;
+        }
+        @keyframes fade { from {opacity: 0.3;} to {opacity: 1;} }
+
+        /* ========== 卡片通用 ========== */
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 1.2rem 1rem;
+            margin-bottom: 1.4rem;
+            box-shadow: 0 12px 24px -12px rgba(100, 70, 180, 0.3);
+            border: 1px solid rgba(255,255,255,0.8);
+            transition: 0.2s;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2a1b4b;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-left: 6px solid #9f7aea;
+            padding-left: 12px;
+        }
+        .card-title i { color: #7b4ed8; }
+
+        /* 快速导航网格 */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.7rem;
+            margin-top: 0.5rem;
+        }
+        .nav-item {
+            background: rgba(240, 230, 255, 0.7);
+            border-radius: 20px;
+            padding: 0.8rem 0.2rem;
+            text-align: center;
+            font-weight: 600;
+            color: #382a5c;
+            border: 1px solid white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            backdrop-filter: blur(4px);
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        .nav-item i {
+            font-size: 1.6rem;
+            color: #6d46c1;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* 倒计时块 - 融合砖墙风格 */
+        .countdown-box {
+            background: #4d3624;    /* 深木炭色 */
+            border-radius: 3rem;
+            padding: 2rem 1.2rem 1.8rem 1.2rem;
+            margin: 1.5rem 0 1rem 0;
+            box-shadow: inset 0 -4px 0 #2f1f13, 0 10px 15px rgba(0,0,0,0.4);
+            border-left: 4px solid #b7a177;
+            border-right: 4px solid #b7a177;
+            position: relative;
+        }
+        .countdown-box::before {
+            content: "";
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            right: 30px;
+            height: 4px;
+            background: repeating-linear-gradient(90deg, #c9a87c 0px, #c9a87c 8px, transparent 8px, transparent 16px);
+            opacity: 0.5;
+        }
+        .countdown-box::after {
+            content: "🧱";
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 2.2rem;
+            opacity: 0.15;
+            transform: rotate(5deg);
+            pointer-events: none;
+        }
+        .timer {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fae7cb;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: center;
+            line-height: 1.3;
+            gap: 0.2rem 0.4rem;
+        }
+        .timer .num {
+            background: #1f140e;
+            padding: 0.25rem 0.6rem 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffd79c;
+            text-shadow: 0 0 8px #fabe6e;
+            box-shadow: inset 0 -2px 0 #614d38, 0 4px 0 #0a0806;
+            letter-spacing: 3px;
+            min-width: 70px;
+            display: inline-block;
+            margin: 0 2px;
+        }
+        #days.num {
+            min-width: 90px;
+        }
+        .timer .unit {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #eaceaa;
+            margin-right: 0.2rem;
+        }
+        .timer .separator {
+            font-size: 2.2rem;
+            color: #eaceaa;
+            font-weight: 700;
+            text-shadow: 2px 2px 0 #3f2d1b;
+            margin: 0 0.1rem;
+        }
+        .suffix-text {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #ffd97e;
+            background: #2d1f14;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 0.5rem;
+            border: 1px solid #dbb47a;
+            box-shadow: 0 3px 0 #6a4d33;
+            letter-spacing: 2px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .target-hint {
+            text-align: center;
+            font-size: 1rem;
+            margin: 0.8rem 0 0.2rem;
+            color: #f1dbb6;
+            background: #5d4632;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #cfa668;
+        }
+
+        .quote-area {
+            background: #dac29c;
+            border-radius: 40px 40px 20px 20px;
+            padding: 1.4rem 1.2rem;
+            margin: 1rem 0 0.5rem;
+            text-align: center;
+            border: 2px solid #b48b54;
+            box-shadow: inset 0 0 0 2px #f5e8d4, 0 6px 0 #7b5f3f;
+        }
+
+        .today-motto {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c1e0f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .today-motto span {
+            background: #6b4f33;
+            color: #f7e3c0;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            border: 1px solid #eac384;
+        }
+
+        .motto-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-style: italic;
+            color: #3e2c19;
+            text-shadow: 2px 2px 0 #ddb87b;
+            line-height: 1.3;
+        }
+
+        /* 成绩表格样式 */
+        .exam-tabs {
+            display: flex;
+            gap: 0.3rem;
+            margin-bottom: 1rem;
+            background: rgba(255,255,255,0.5);
+            padding: 0.3rem;
+            border-radius: 40px;
+        }
+        .exam-tab {
+            flex: 1;
+            text-align: center;
+            padding: 0.4rem 0;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: transparent;
+            border: none;
+            color: #3b2b5c;
+            cursor: pointer;
+        }
+        .exam-tab.active {
+            background: #9b7ef0;
+            color: white;
+        }
+        .score-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+        .score-table th {
+            background: #d6c4ff;
+            color: #2e1a5c;
+            font-weight: 600;
+            padding: 0.5rem 0.2rem;
+            border-radius: 20px 20px 0 0;
+        }
+        .score-table td {
+            padding: 0.5rem 0.2rem;
+            border-bottom: 1px solid #e3d2ff;
+            text-align: center;
+        }
+        .trend-up { color: #2c7a4d; font-weight: 800; }
+        .trend-down { color: #b13e3e; font-weight: 800; }
+        .rank-badge {
+            background: #ab8bff;
+            color: white;
+            border-radius: 30px;
+            padding: 0.1rem 0.4rem;
+            font-size: 0.7rem;
+        }
+        .absent-badge {
+            background: #ff9999;
+            color: white;
+            border-radius: 30px;
+            padding: 0.1rem 0.4rem;
+            font-size: 0.7rem;
+        }
+
+        /* 院校卡片网格 - 图文结合 */
+        .college-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+        .college-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 6px 14px #b7a0e6;
+            border: 1px solid white;
+            transition: transform 0.2s;
+        }
+        .college-card:hover {
+            transform: translateY(-3px);
+        }
+        .college-img {
+            width: 100%;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .college-img::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+        }
+        .college-content {
+            padding: 0.8rem;
+            background: white;
+        }
+        .college-card h3 {
+            font-size: 1rem;
+            color: #401e6b;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+        }
+        .college-badge {
+            background: #ab8bff;
+            color: white;
+            border-radius: 30px;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin: 4px 0;
+        }
+        .score-line {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2a1b4b;
+            margin-top: 0.3rem;
+            padding-top: 0.3rem;
+            border-top: 1px dashed #e3d2ff;
+        }
+        .score-highlight {
+            color: #7b4ed8;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .college-type {
+            font-size: 0.7rem;
+            color: #666;
+            margin-left: 0.3rem;
+        }
+
+        /* 院校背景图片 - 使用本地图片 */
+        /* 注：实际使用时请确保 images 文件夹下有对应图片文件 */
+
+        /* PDF下载链接样式 */
+        .pdf-link {
+            display: flex;
+            align-items: center;
+            background: #f1e9ff;
+            border-radius: 60px;
+            padding: 0.8rem 1rem;
+            margin: 0.6rem 0;
+            color: #3e1d7a;
+            font-weight: 600;
+            border: 1px dashed #9f7aea;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .pdf-link:hover {
+            background: #e5d5ff;
+            transform: translateX(5px);
+        }
+        .pdf-link i { 
+            margin-right: 10px; 
+            color: #b042ff;
+            font-size: 1.2rem;
+        }
+        .pdf-date {
+            margin-left: auto;
+            font-size: 0.7rem;
+            color: #8a6de9;
+            background: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+        }
+
+        /* 时间轴 (原记忆板块样式，现保留但不再使用，可保留) */
+        .timeline-item {
+            display: flex;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+        .timeline-dot {
+            min-width: 14px; height: 14px; background: #8a6de9; border-radius: 50%; margin-top: 6px; border: 3px solid white; box-shadow: 0 0 0 2px #b27efc;
+        }
+        .photo-wall {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            background: #d9c9ff;
+            padding: 1rem;
+            border-radius: 30px;
+        }
+        .photo-placeholder {
+            background: rgba(255,255,255,0.6);
+            border-radius: 16px;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a185d9;
+            font-size: 2rem;
+            border: 2px dashed white;
+        }
+
+        /* 输入框/按钮 */
+        .input-group {
+            background: white;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0.2rem 1rem;
+            margin: 1rem 0;
+            border: 1px solid #c9b0ff;
+        }
+        .input-group input {
+            border: none; background: none; padding: 0.8rem 0; width: 100%; outline: none;
+        }
+        .btn {
+            background: #9b7ef0; color: white; border: none; border-radius: 40px; padding: 0.8rem; font-weight: bold; width: 100%; margin-top: 0.5rem;
+            cursor: pointer;
+        }
+        .btn:disabled {
+            background: #c9c0e0;
+            cursor: not-allowed;
+        }
+
+        /* 底部版权信息已移除 */
+        footer {
+            display: none;
+        }
+        
+        .student-info {
+            background: #e9dbff;
+            border-radius: 30px;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .error-message {
+            color: #b13e3e;
+            text-align: center;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .loading {
+            text-align: center;
+            padding: 1rem;
+            color: #6d46c1;
+        }
+
+        @media (max-width: 500px) {
+            .timer .num { font-size: 1.8rem; min-width: 55px; }
+            .suffix-text { font-size: 1.4rem; }
+            .motto-text { font-size: 1.2rem; }
+            .college-img { height: 80px; }
+            .college-img::before { font-size: 1rem; }
+        }
+
+        /* ---------- 新增高频考点卡片样式 (与原站完美融合) ---------- */
+        .faq-section {
+            margin: 1.5rem 0 0.8rem 0;
+            background: transparent;
+        }
+        .faq-section h2 {
+            color: #2a1b4b;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-left: 6px solid #9f7aea;
+            padding-left: 12px;
+            font-weight: 700;
+        }
+        .faq-section h2 i {
+            color: #7b4ed8;
+        }
+        #faqContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .faq-card {
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 24px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 20px -8px rgba(100, 70, 180, 0.25);
+            transition: 0.15s;
+        }
+        .faq-question {
+            padding: 14px 18px;
+            background: rgba(245, 240, 255, 0.8);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #2a1b4b;
+            border-bottom: 1px solid transparent;
+            transition: background 0.2s, border-color 0.2s;
+            font-size: 0.95rem;
+            letter-spacing: 0.2px;
+        }
+        .faq-question:hover {
+            background: rgba(235, 225, 255, 0.9);
+        }
+        .faq-question span:first-child i {
+            color: #8a6de9;
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+        .subject-tag {
+            font-size: 0.7rem;
+            background: #ab8bff;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 30px;
+            margin-left: 10px;
+            display: inline-block;
+            vertical-align: middle;
+            font-weight: 500;
+        }
+        .arrow {
+            font-size: 1.2rem;
+            color: #7b4ed8;
+            transition: transform 0.25s;
+        }
+        .faq-question.open .arrow {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.3s ease;
+            background: rgba(255, 255, 255, 0.5);
+            color: #2f1b5a;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            border-top: 0px solid transparent;
+        }
+        .faq-answer.open {
+            padding: 12px 18px 18px 18px;
+            max-height: 200px; 
+            border-top: 1px dashed #d0bcf0;
+        }
+        .faq-footnote {
+            text-align: right;
+            font-size: 0.7rem;
+            margin-top: 6px;
+            color: #7a62b5;
+        }
+
+        /* ===== 班务板块（清洁值日表）样式 ===== */
+        .value-card {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(2px);
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(80, 60, 160, 0.2);
+            overflow: hidden;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 8px solid #9f7aea;
+            padding-left: 16px;
+        }
+        .header-title i {
+            font-size: 2rem;
+            color: #7b4ed8;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            padding: 8px;
+        }
+        .header-title h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2a1b4b;
+            letter-spacing: 1px;
+        }
+        .header-title p {
+            color: #4a3a6e;
+            margin-top: 4px;
+            font-size: 0.9rem;
+        }
+        .week-tabs {
+            display: flex;
+            gap: 0.8rem;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            padding: 0.6rem;
+            border-radius: 60px;
+            margin-bottom: 2rem;
+            border: 1px solid white;
+        }
+        .week-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 0.8rem 0;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #3b2b5c;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .week-btn i {
+            margin-right: 6px;
+            color: #6d46c1;
+        }
+        .week-btn.active {
+            background: linear-gradient(135deg, #7f5af0, #b47cff);
+            color: white;
+            border: 1px solid white;
+            box-shadow: 0 6px 14px #a07dd0;
+        }
+        .week-btn.active i {
+            color: white;
+        }
+        .schedule-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 36px;
+            padding: 1.6rem 1.2rem;
+            box-shadow: 0 12px 24px -12px rgba(100, 70, 180, 0.3);
+            border: 1px solid rgba(255,255,255,0.8);
+            margin-bottom: 1.2rem;
+            transition: 0.2s;
+        }
+        .day-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px dashed #c7b0ff;
+        }
+        .day-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .day-icon {
+            width: 60px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #5a3d9c;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(230, 215, 255, 0.7);
+            padding: 0.4rem 0;
+            border-radius: 30px;
+            margin-right: 1rem;
+        }
+        .day-icon i {
+            font-size: 1.4rem;
+            color: #8a6de9;
+        }
+        .day-icon span {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .students-list {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1rem;
+        }
+        .student-badge {
+            background: white;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #2a1b4b;
+            box-shadow: 0 2px 8px rgba(128, 90, 213, 0.2);
+            border: 1px solid #f0e4ff;
+            font-size: 1rem;
+        }
+        .student-badge i {
+            color: #9f7aea;
+            font-size: 0.8rem;
+            margin-right: 4px;
+        }
+        .footnote {
+            background: rgba(235, 225, 255, 0.7);
+            border-radius: 40px;
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: #3d2a63;
+            border: 1px solid white;
+            backdrop-filter: blur(4px);
+            margin-top: 1rem;
+        }
+        .footnote i {
+            color: #b47cff;
+            margin-right: 6px;
+        }
+        .extra-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.6rem;
+            margin-top: 0.8rem;
+        }
+        .extra-tag {
+            background: #e7daff;
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.8rem;
+            color: #4a2e7a;
+            border: 1px solid #d3bbff;
+        }
+        .week-panel {
+            display: none;
+        }
+        .week-panel.active-panel {
+            display: block;
+        }
+        @media (max-width: 500px) {
+            .value-card { padding: 1.2rem; }
+            .day-row { flex-direction: column; }
+            .day-icon { width: 100%; flex-direction: row; justify-content: center; gap: 8px; margin-right: 0; margin-bottom: 0.8rem; }
+            .students-list { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+<div class="site-container">
+    <!-- 导航tab -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" data-page="home"><i class="fas fa-home"></i>首页</button>
+        <button class="tab-btn" data-page="scores"><i class="fas fa-chart-line"></i>成绩</button>
+        <button class="tab-btn" data-page="colleges"><i class="fas fa-university"></i>院校</button>
+        <button class="tab-btn" data-page="guide"><i class="fas fa-compass"></i>升学</button>
+        <button class="tab-btn" data-page="memory"><i class="fas fa-clipboard-list"></i>班务</button>
+    </div>
+
+    <!-- 页面1: 首页 -->
+    <div id="page-home" class="page active-page">
+        <div class="card">
+            <div class="card-title"><i class="fas fa-users"></i> 2023级建筑毕业班 · 2314班</div>
+            <p style="margin-bottom:0.8rem;">🏆 36位鲁班传人 · 校级先进班集体</p>
+            
+            <div class="countdown-box">
+                <div class="timer">
+                    <span class="num" id="days">0</span>
+                    <span class="unit">天</span>
+                    <span class="num" id="hours">00</span>
+                    <span class="separator">:</span>
+                    <span class="num" id="minutes">00</span>
+                    <span class="separator">:</span>
+                    <span class="num" id="seconds">00</span>
+                </div>
+                <div class="suffix-text" id="suffixMessage">后顶峰相见</div>
+                <div class="target-hint">📅 (2026年6月7日零时 · 北京时间)</div>
+            </div>
+
+            <div class="quote-area">
+                <div class="today-motto">
+                    <span>📜 今日寄语</span>
+                </div>
+                <div class="motto-text">“用砖瓦精神，筑未来之城”</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title"><i class="fas fa-bolt"></i> 快速导航</div>
+            <div class="nav-grid">
+                <div class="nav-item" data-nav="scores"><i class="fas fa-search"></i>成绩</div>
+                <div class="nav-item" data-nav="colleges"><i class="fas fa-graduation-cap"></i>院校</div>
+                <div class="nav-item" data-nav="guide"><i class="fas fa-file-pdf"></i>复习</div>
+                <div class="nav-item" data-nav="memory"><i class="fas fa-broom"></i>班务</div>
+                <div class="nav-item" data-nav="home"><i class="fas fa-clock"></i>倒计时</div>
+                <div class="nav-item" data-nav="guide"><i class="fas fa-pencil-alt"></i>志愿</div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title"><i class="fas fa-star"></i> 班级荣耀</div>
+            <p>📐 测量竞赛省三等奖 · 🏆 一二九主题班会校级特等奖</p>
+        </div>
+    </div>
+
+    <!-- 页面2: 成绩查询 (基于真实数据) -->
+    <div id="page-scores" class="page">
+        <div class="card">
+            <div class="card-title"><i class="fas fa-magnifying-glass"></i> 2314班成绩查询</div>
+            <div class="input-group">
+                <i class="fas fa-user" style="color:#8b68e0;"></i>
+                <input type="text" placeholder="输入姓名" id="studentName" list="student-names">
+                <datalist id="student-names"></datalist>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock" style="color:#8b68e0;"></i>
+                <input type="password" placeholder="输入密码" id="studentPwd">
+            </div>
+            <button class="btn" id="scoreQueryBtn"><i class="fas fa-arrow-right"></i> 查询成绩</button>
+        </div>
+
+        <!-- 成绩展示区 (初始隐藏) -->
+        <div id="scoreResultContainer" style="display: none;">
+            <div class="card student-info" id="studentInfoCard">
+                <span><i class="fas fa-user-graduate"></i> <span id="studentNameDisplay"></span></span>
+                <span><span class="rank-badge" id="studentClass">2314班</span></span>
+            </div>
+            
+            <div class="exam-tabs card" style="padding:0.5rem;">
+                <button class="exam-tab active" data-exam="1">11月调考</button>
+                <button class="exam-tab" data-exam="2">12月调考</button>
+                <button class="exam-tab" data-exam="3">1月调考</button>
+            </div>
+
+            <div id="exam1Result" class="exam-result">
+                <div class="card">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                        <span><i class="fas fa-calendar"></i> 2025年11月</span>
+                        <span><span class="rank-badge" id="rank1"></span> <span id="absent1" class="absent-badge" style="display:none;">缺考</span></span>
+                    </div>
+                    <table class="score-table" id="scoreTable1">
+                        <tr><th>科目</th><th>分数</th></tr>
+                        <tr><td>建筑识图套题</td><td id="s11"></td></tr>
+                        <tr><td>建设法规</td><td id="s12"></td></tr>
+                        <tr><td>建筑材料与检测</td><td id="s13"></td></tr>
+                        <tr><td>建筑制图与识图</td><td id="s14"></td></tr>
+                        <tr><td>建筑构造</td><td id="s15"></td></tr>
+                        <tr><td>建筑工程测量</td><td id="s16"></td></tr>
+                        <tr><td style="font-weight:600;">专业课总分</td><td id="total1"></td></tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="exam2Result" class="exam-result" style="display:none;">
+                <div class="card">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                        <span><i class="fas fa-calendar"></i> 2025年12月</span>
+                        <span><span class="rank-badge" id="rank2"></span> <span id="absent2" class="absent-badge" style="display:none;">缺考</span></span>
+                    </div>
+                    <table class="score-table" id="scoreTable2">
+                        <tr><th>科目</th><th>分数</th></tr>
+                        <tr><td>建筑识图套题</td><td id="s21"></td></tr>
+                        <tr><td>建设法规</td><td id="s22"></td></tr>
+                        <tr><td>建筑材料与检测</td><td id="s23"></td></tr>
+                        <tr><td>建筑制图与识图</td><td id="s24"></td></tr>
+                        <tr><td>建筑构造</td><td id="s25"></td></tr>
+                        <tr><td>建筑工程测量</td><td id="s26"></td></tr>
+                        <tr><td style="font-weight:600;">专业课总分</td><td id="total2"></td></tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="exam3Result" class="exam-result" style="display:none;">
+                <div class="card">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                        <span><i class="fas fa-calendar"></i> 2026年1月</span>
+                        <span><span class="rank-badge" id="rank3"></span> <span id="absent3" class="absent-badge" style="display:none;">缺考</span></span>
+                    </div>
+                    <table class="score-table" id="scoreTable3">
+                        <tr><th>科目</th><th>分数</th></tr>
+                        <tr><td>建筑识图套题</td><td id="s31"></td></tr>
+                        <tr><td>建设法规</td><td id="s32"></td></tr>
+                        <tr><td>建筑材料与检测</td><td id="s33"></td></tr>
+                        <tr><td>建筑制图与识图</td><td id="s34"></td></tr>
+                        <tr><td>建筑构造</td><td id="s35"></td></tr>
+                        <tr><td>建筑工程测量</td><td id="s36"></td></tr>
+                        <tr><td style="font-weight:600;">专业课总分</td><td id="total3"></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card" id="progressCard">
+                <div class="card-title"><i class="fas fa-chart-line"></i> 三次调考进退步</div>
+                <div style="display:flex; justify-content:space-around; text-align:center;">
+                    <div>11→12月 <br> <span id="progress1" class="trend-up">--</span></div>
+                    <div>12→1月 <br> <span id="progress2" class="trend-up">--</span></div>
+                    <div>累计进步 <br> <span id="progress3" class="trend-up">--</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" id="noResultCard" style="display: none;">
+            <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i> 未找到该学生，请检查姓名
+            </div>
+        </div>
+
+        <div class="card" id="initialPromptCard">
+            <i class="fas fa-lightbulb"></i> 输入姓名后点击查询，查看三次调考详细成绩
+        </div>
+    </div>
+
+    <!-- 页面3: 对口院校 - 使用本地图片 -->
+    <div id="page-colleges" class="page">
+        <div class="card" style="padding-bottom:0.5rem;">
+            <div class="card-title"><i class="fas fa-building-columns"></i> 建筑类对口本专科 · 2025投档线</div>
+            <div class="college-grid">
+                <!-- 1. 武昌首义学院 -->
+                <div class="college-card">
+                    <div class="college-img" style="background-image: url('./images/武昌首义学院.png'); background-size: cover; background-position: center;"></div>
+                    <div class="college-content">
+                        <h3>武昌首义学院</h3>
+                        <span class="college-badge">本科</span>
+                        <div class="score-line"><span class="score-highlight">539</span>分</div>
+                    </div>
+                </div>
+                
+                <!-- 2. 武汉工程科技学院 -->
+                <div class="college-card">
+                    <div class="college-img" style="background-image: url('./images/武汉工程科技学院.png'); background-size: cover; background-position: center;"></div>
+                    <div class="college-content">
+                        <h3>武汉工程科技学院</h3>
+                        <span class="college-badge">本科</span>
+                        <div class="score-line"><span class="score-highlight">517</span>分</div>
+                    </div>
+                </div>
+                
+                <!-- 3. 武汉城市学院 -->
+                <div class="college-card">
+                    <div class="college-img" style="background-image: url('./images/武汉城市学院.png'); background-size: cover; background-position: center;"></div>
+                    <div class="college-content">
+                        <h3>武汉城市学院</h3>
+                        <span class="college-badge">本科</span>
+                        <div class="score-line"><span class="score-highlight">517</span>分</div>
+                    </div>
+                </div>
+
+                <!-- 4. 三峡大学科技学院 -->
+                <div class="college-card">
+                    <div class="college-img" style="background-image: url('./images/三峡大学科技学院.png'); background-size: cover; background-position: center;"></div>
+                    <div class="college-content">
+                        <h3>三峡大学科技学院</h3>
+                        <span class="college-badge">本科</span>
+                        <div class="score-line"><span class="score-highlight">540</span>分</div>
+                    </div>
+                </div>
+
+                <!-- 5. 武昌工学院 -->
+                <div class="college-card">
+                    <div class="college-img" style="background-image: url('./images/武昌工学院.png'); background-size: cover; background-position: center;"></div>
+                    <div class="college-content">
+                        <h3>武昌工学院</h3>
+                        <span class="college-badge">本科</span>
+                        <div class="score-line"><span class="score-highlight">517</span>分</div>
+                    </div>
+                </div>
+
+                <!-- 6. 湖北商贸学院 -->
+                <div class="college-card">
+                    <div class="college-img" style="background-image: url('./images/湖北商贸学院.png'); background-size: cover; background-position: center;"></div>
+                    <div class="college-content">
+                        <h3>湖北商贸学院</h3>
+                        <span class="college-badge">本科</span>
+                        <div class="score-line"><span class="score-highlight">517</span>分</div>
+                    </div>
+                </div>
+
+                <!-- 7. 湖北工业大学工程技术学院 -->
+                <div class="college-card">
+                    <div class="college-img" style="background-image: url('./images/湖北工业大学工程技术学院.png'); background-size: cover; background-position: center;"></div>
+                    <div class="college-content">
+                        <h3>湖北工业大学工程技术学院</h3>
+                        <span class="college-badge">本科</span>
+                        <div class="score-line"><span class="score-highlight">594</span>分</div>
+                    </div>
+                </div>
+
+                <!-- 8. 武汉职业技术大学 -->
+                <div class="college-card">
+                    <div class="college-img" style="background-image: url('./images/武汉职业技术大学.png'); background-size: cover; background-position: center;"></div>
+                    <div class="college-content">
+                        <h3>武汉职业技术大学</h3>
+                        <span class="college-badge">专科</span>
+                        <div class="score-line"><span class="score-highlight">461</span>分</div>
+                    </div>
+                </div>
+
+                <!-- 9. 湖北科技职业学院 -->
+                <div class="college-card">
+                    <div class="college-img" style="background-image: url('./images/湖北科技职业学院.png'); background-size: cover; background-position: center;"></div>
+                    <div class="college-content">
+                        <h3>湖北科技职业学院</h3>
+                        <span class="college-badge">专科</span>
+                        <div class="score-line"><span class="score-highlight">415</span>分</div>
+                    </div>
+                </div>
+
+                <!-- 10. 武汉船舶职业技术学院 -->
+                <div class="college-card">
+                    <div class="college-img" style="background-image: url('./images/武汉船舶职业技术学院.png'); background-size: cover; background-position: center;"></div>
+                    <div class="college-content">
+                        <h3>武汉船舶职业技术学院</h3>
+                        <span class="college-badge">专科</span>
+                        <div class="score-line"><span class="score-highlight">412</span>分</div>
+                    </div>
+                </div>
+
+                <!-- 11. 湖北三峡职业技术学院 -->
+                <div class="college-card">
+                    <div class="college-img" style="background-image: url('./images/湖北三峡职业技术学院.png'); background-size: cover; background-position: center;"></div>
+                    <div class="college-content">
+                        <h3>湖北三峡职业技术学院</h3>
+                        <span class="college-badge">专科</span>
+                        <div class="score-line"><span class="score-highlight">408</span>分</div>
+                    </div>
+                </div>
+
+                <!-- 12. 武汉城市职业学院 -->
+                <div class="college-card">
+                    <div class="college-img" style="background-image: url('./images/武汉城市职业学院.png'); background-size: cover; background-position: center;"></div>
+                    <div class="college-content">
+                        <h3>武汉城市职业学院</h3>
+                        <span class="college-badge">专科</span>
+                        <div class="score-line"><span class="score-highlight">395</span>分</div>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align:center; font-size:0.7rem; margin-top:0.8rem; color:#5e4c83;">* 以上为2025年投档线，仅供参考</p>
+        </div>
+    </div>
+
+    <!-- 页面4: 升学指南 (真题下载+高频考点) -->
+    <div id="page-guide" class="page">
+        <div class="card">
+            <div class="card-title"><i class="fas fa-file-lines"></i> 对口升学政策</div>
+            <p>✅ 湖北省建筑类技能高考: 文化课+技能操作(700分)。2025年本科线预估500左右。</p>
+            <p>✅ 免试政策: 省技能大赛一等奖可直接录取。</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title"><i class="fas fa-download"></i> 专业课复习资料 · 三次调考真题</div>
+            <a href="#" class="pdf-link" id="downloadNov"><i class="fas fa-file-pdf"></i> 2025年11月建筑技术类调考真题 <span class="pdf-date">51题</span></a>
+            <a href="#" class="pdf-link" id="downloadDec"><i class="fas fa-file-pdf"></i> 2025年12月建筑技术类调考真题 <span class="pdf-date">51题</span></a>
+            <a href="#" class="pdf-link" id="downloadJan"><i class="fas fa-file-pdf"></i> 2026年1月建筑技术类调考真题 <span class="pdf-date">51题</span></a>
+            <small style="display:block; text-align:center; margin-top:0.8rem; color:#6d46c1;">点击链接即可下载PDF模拟试题</small>
+        </div>
+
+        <div class="faq-section">
+            <h2><i class="fas fa-lightbulb"></i> 高频考点问答 (点击展开)</h2>
+            <div id="faqContainer"></div>
+            <div class="faq-footnote"><i class="fas fa-graduation-cap"></i> 基于三次调考真题 · 15个核心考点</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title"><i class="fas fa-pen"></i> 志愿填报技巧</div>
+            <ul style="margin-left:1.5rem; color:#2f1b5a;">
+                <li>🔹 按照“冲、稳、保”拉开梯度</li>
+                <li>🔹 关注建筑类双高院校/王牌专业</li>
+                <li>🔹 参考近三年位次而非绝对分数</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 页面5: 班务板块 (值日表) -->
+    <div id="page-memory" class="page">
+        <div class="value-card">
+            <div class="header-title">
+                <i class="fas fa-broom"></i>
+                <div>
+                    <h1>2314班 · 清洁值日</h1>
+                    <p><i class="fas fa-users" style="color:#7b4ed8;"></i> 单双周轮换 · 共计36人</p>
+                </div>
+            </div>
+
+            <div class="week-tabs">
+                <button class="week-btn active" id="btnSingleWeek"><i class="fas fa-calendar-week"></i> 单周值日</button>
+                <button class="week-btn" id="btnDoubleWeek"><i class="fas fa-calendar-alt"></i> 双周值日</button>
+            </div>
+
+            <div id="singleWeekPanel" class="week-panel active-panel">
+                <div class="schedule-card">
+                    <div class="day-row"><div class="day-icon"><i class="fas fa-sun"></i><span>周一</span></div><div class="students-list"><span class="student-badge"><i class="fas fa-user"></i> 肖梓奥</span><span class="student-badge"><i class="fas fa-user"></i> 谢正浩</span><span class="student-badge"><i class="fas fa-user"></i> 褚智通</span><span class="student-badge"><i class="fas fa-user"></i> 倪浩禹</span></div></div>
+                    <div class="day-row"><div class="day-icon"><i class="fas fa-cloud"></i><span>周二</span></div><div class="students-list"><span class="student-badge"><i class="fas fa-user"></i> 杜伟健</span><span class="student-badge"><i class="fas fa-user"></i> 胡昊</span><span class="student-badge"><i class="fas fa-user"></i> 蒋子轩</span></div></div>
+                    <div class="day-row"><div class="day-icon"><i class="fas fa-cloud-sun"></i><span>周三</span></div><div class="students-list"><span class="student-badge"><i class="fas fa-user"></i> 周优博</span><span class="student-badge"><i class="fas fa-user"></i> 刘必为</span><span class="student-badge"><i class="fas fa-user"></i> 董致先</span><span class="student-badge"><i class="fas fa-user"></i> 卢涵</span></div></div>
+                    <div class="day-row"><div class="day-icon"><i class="fas fa-cloud-rain"></i><span>周四</span></div><div class="students-list"><span class="student-badge"><i class="fas fa-user"></i> 韩承锦</span><span class="student-badge"><i class="fas fa-user"></i> 邱志豪</span><span class="student-badge"><i class="fas fa-user"></i> 龚诗哲</span></div></div>
+                    <div class="day-row"><div class="day-icon"><i class="fas fa-moon"></i><span>周五</span></div><div class="students-list"><span class="student-badge"><i class="fas fa-user"></i> 吴子童</span><span class="student-badge"><i class="fas fa-user"></i> 程子家</span><span class="student-badge"><i class="fas fa-user"></i> 曾鑫</span><span class="student-badge"><i class="fas fa-user"></i> 刘恒</span></div></div>
+                </div>
+            </div>
+
+            <div id="doubleWeekPanel" class="week-panel">
+                <div class="schedule-card">
+                    <div class="day-row"><div class="day-icon"><i class="fas fa-sun"></i><span>周一</span></div><div class="students-list"><span class="student-badge"><i class="fas fa-user"></i> 张星航</span><span class="student-badge"><i class="fas fa-user"></i> 陈浩宇轩</span><span class="student-badge"><i class="fas fa-user"></i> 王梓宇</span><span class="student-badge"><i class="fas fa-user"></i> 王运可</span></div></div>
+                    <div class="day-row"><div class="day-icon"><i class="fas fa-cloud"></i><span>周二</span></div><div class="students-list"><span class="student-badge"><i class="fas fa-user"></i> 李憬恒</span><span class="student-badge"><i class="fas fa-user"></i> 夏正杰</span><span class="student-badge"><i class="fas fa-user"></i> 胡志诚</span></div></div>
+                    <div class="day-row"><div class="day-icon"><i class="fas fa-cloud-sun"></i><span>周三</span></div><div class="students-list"><span class="student-badge"><i class="fas fa-user"></i> 彭子越</span><span class="student-badge"><i class="fas fa-user"></i> 夏鑫</span><span class="student-badge"><i class="fas fa-user"></i> 倪志扬</span><span class="student-badge"><i class="fas fa-user"></i> 陈睿</span></div></div>
+                    <div class="day-row"><div class="day-icon"><i class="fas fa-cloud-rain"></i><span>周四</span></div><div class="students-list"><span class="student-badge"><i class="fas fa-user"></i> 周子浩</span><span class="student-badge"><i class="fas fa-user"></i> 李含旭</span><span class="student-badge"><i class="fas fa-user"></i> 陈明飞</span></div></div>
+                    <div class="day-row"><div class="day-icon"><i class="fas fa-moon"></i><span>周五</span></div><div class="students-list"><span class="student-badge"><i class="fas fa-user"></i> 尚成杰</span><span class="student-badge"><i class="fas fa-user"></i> 李瑾璨</span><span class="student-badge"><i class="fas fa-user"></i> 黄新悦</span><span class="student-badge"><i class="fas fa-user"></i> 刘晨翔</span></div></div>
+                </div>
+            </div>
+
+            <div class="footnote">
+                <i class="fas fa-info-circle"></i> 单周组：肖梓奥 至 刘恒 (前18人) ；双周组：张星航 至 黄新悦 (后18人) 。轮换执行，每周一、三、五各4人，二、四各3人。
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ---------- 倒计时 (2026年6月7日 00:00:00 北京时间) ----------
+        const targetDate = new Date('2026-06-07T00:00:00+08:00');
+        let countdownTarget = !isNaN(targetDate.getTime()) ? targetDate : new Date(Date.UTC(2026, 5, 6, 16, 0, 0));
+
+        const daysSpan = document.getElementById('days');
+        const hoursSpan = document.getElementById('hours');
+        const minutesSpan = document.getElementById('minutes');
+        const secondsSpan = document.getElementById('seconds');
+        const suffixSpan = document.getElementById('suffixMessage');
+
+        function padTwo(num) {
+            return num < 10 ? '0' + num : num;
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const diffMs = countdownTarget - now;
+
+            if (diffMs <= 0) {
+                daysSpan.textContent = '0';
+                hoursSpan.textContent = '00';
+                minutesSpan.textContent = '00';
+                secondsSpan.textContent = '00';
+                suffixSpan.textContent = '顶峰已相见';
+                return;
+            }
+
+            const totalSeconds = Math.floor(diffMs / 1000);
+            const days = Math.floor(totalSeconds / 86400);
+            const hours = Math.floor((totalSeconds % 86400) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            daysSpan.textContent = days;
+            hoursSpan.textContent = padTwo(hours);
+            minutesSpan.textContent = padTwo(minutes);
+            secondsSpan.textContent = padTwo(seconds);
+            suffixSpan.textContent = '后顶峰相见';
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // ---------- 页面切换 ----------
+        const pages = {
+            home: document.getElementById('page-home'),
+            scores: document.getElementById('page-scores'),
+            colleges: document.getElementById('page-colleges'),
+            guide: document.getElementById('page-guide'),
+            memory: document.getElementById('page-memory')
+        };
+        const tabs = document.querySelectorAll('.tab-btn');
+
+        function setActivePage(pageId) {
+            Object.values(pages).forEach(p => p.classList.remove('active-page'));
+            if (pages[pageId]) pages[pageId].classList.add('active-page');
+            tabs.forEach(t => {
+                t.classList.remove('active');
+                if (t.dataset.page === pageId) t.classList.add('active');
+            });
+        }
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                const pageId = tab.dataset.page;
+                setActivePage(pageId);
+            });
+        });
+
+        document.querySelectorAll('.nav-item[data-nav]').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const targetPage = item.dataset.nav;
+                if (targetPage && pages[targetPage]) {
+                    setActivePage(targetPage);
+                }
+            });
+        });
+
+        // ---------- 2314班学生名单 ----------
+        const class2314Students = [
+            "卢涵", "吴子童", "刘晨翔", "蒋子轩", "王运可", "曾鑫", "董致先", "杜伟健", 
+            "褚智通", "周优博", "谢正浩", "刘必为", "陈明飞", "王梓宇", "彭子越", "黄新悦", 
+            "李瑾璨", "周子浩", "夏正杰", "刘恒", "夏鑫", "程子家", "邱志豪", "倪志扬", 
+            "陈睿", "胡昊", "陈浩宇轩", "李含旭", "肖梓奥", "胡志诚", "倪浩禹", "李憬恒", 
+            "韩承锦", "尚成杰", "张星航", "龚诗哲"
+        ].slice(0, 36);
+
+        const datalist = document.getElementById('student-names');
+        class2314Students.forEach(name => {
+            const option = document.createElement('option');
+            option.value = name;
+            datalist.appendChild(option);
+        });
+
+        // ---------- 从Excel提取的2314班三次调考数据 ----------
+        const examData = {
+            // 2025年11月调考数据
+            exam1: [
+                { name: "卢涵", scores: [145, 22.5, 16, 25.5, 26, 17, 252] },
+                { name: "吴子童", scores: [158, 20, 8, 21, 20, 22, 249] },
+                { name: "刘晨翔", scores: [155.5, 11, 15, 15, 23, 21, 240.5] },
+                { name: "蒋子轩", scores: [168, 12, 13, 20, 13, 10, 236] },
+                { name: "王运可", scores: [140, 19.5, 16, 19, 17, 21, 232.5] },
+                { name: "曾鑫", scores: [144, 16.5, 19, 19.5, 17, 13, 229] },
+                { name: "董致先", scores: [137.5, 9, 13, 27.5, 10, 23, 220] },
+                { name: "杜伟健", scores: [140.5, 12, 11, 18, 22, 16, 219.5] },
+                { name: "褚智通", scores: [135.5, 12, 18, 18, 15, 16, 214.5] },
+                { name: "周优博", scores: [137, 9, 16, 17, 14, 17, 210] },
+                { name: "谢正浩", scores: [157, 10.5, 9, 22.5, 20, 18, 237] },
+                { name: "刘必为", scores: [135, 17, 13, 19, 21, 17, 222] },
+                { name: "陈明飞", scores: [117, 12, 16, 21, 21.5, 12, 199.5] },
+                { name: "王梓宇", scores: [127, 20, 13, 15, 14, 10, 199] },
+                { name: "彭子越", scores: [120, 10.5, 13, 22.5, 20, 13, 199] },
+                { name: "黄新悦", scores: [126.5, 12, 15, 18, 22, 3, 196.5] },
+                { name: "李瑾璨", scores: [126.5, 10.5, 7, 22.5, 12, 13, 191.5] },
+                { name: "周子浩", scores: [122.5, 10.5, 13, 20.5, 12, 10, 188.5] },
+                { name: "夏正杰", scores: [128, 13.5, 12, 15.5, 14, 5, 188] },
+                { name: "刘恒", scores: [108.5, 12, 15, 23, 15, 14, 187.5] },
+                { name: "夏鑫", scores: [118, 9, 13, 14.5, 23, 7, 184.5] },
+                { name: "程子家", scores: [109.5, 15, 17.5, 20, 9, 13, 184] },
+                { name: "邱志豪", scores: [108.5, 6, 13, 17, 14, 19, 177.5] },
+                { name: "倪志扬", scores: [107.5, 19, 10, 18, 13, 8.5, 176] },
+                { name: "陈睿", scores: [136, 6, 11, 2, 8, 13, 176] },
+                { name: "胡昊", scores: [116, 9, 11, 19, 7, 13, 175] },
+                { name: "陈浩宇轩", scores: [100.5, 16.5, 14, 19, 12, 8, 170] },
+                { name: "李含旭", scores: [101.5, 12, 11, 20, 7, 14, 165.5] },
+                { name: "肖梓奥", scores: [105.5, 6, 14.5, 13, 14, 10, 163] },
+                { name: "胡志诚", scores: [66, 6, 13, 7, 18.5, 8, 118.5] },
+                { name: "倪浩禹", scores: [77, 9, 3, 17.5, 15, 8, 129.5] },
+                { name: "李憬恒", scores: [76.5, 9, 8, 14.5, 9, 11, 128] },
+                { name: "韩承锦", scores: [59, 16.5, 17, 19, 15, 8, 134.5] },
+                { name: "尚成杰", scores: [58.5, 6, 5, 5, 13, 7, 94.5] },
+                { name: "张星航", scores: [0, 0, 0, 0, 0, 0, 0] }, // 缺考
+                { name: "龚诗哲", scores: [0, 0, 0, 0, 0, 0, 0] }  // 缺考
+            ],
+            
+            // 2025年12月调考数据
+            exam2: [
+                { name: "吴子童", scores: [154.5, 24.5, 21, 18, 26, 26, 270] },
+                { name: "卢涵", scores: [137, 25, 16, 15, 25, 27.5, 245.5] },
+                { name: "杜伟健", scores: [125.5, 25, 8, 20.5, 26, 26, 231] },
+                { name: "刘必为", scores: [126, 24.5, 14, 16, 25, 23, 228.5] },
+                { name: "王运可", scores: [125.5, 24, 16, 19.5, 26, 16.5, 227.5] },
+                { name: "蒋子轩", scores: [119, 16.5, 21.5, 23, 15, 18.5, 213.5] },
+                { name: "胡昊", scores: [116.5, 14, 13.5, 23, 23, 23, 213] },
+                { name: "周优博", scores: [133, 10.5, 16, 21, 17, 15, 212.5] },
+                { name: "曾鑫", scores: [121.5, 21, 13, 16, 20, 20, 211.5] },
+                { name: "谢正浩", scores: [116.5, 18, 18.5, 9, 22, 26, 210] },
+                { name: "董致先", scores: [117.5, 18.5, 18, 13.5, 16, 17, 200.5] },
+                { name: "褚智通", scores: [126.5, 18, 15.5, 8, 22, 10, 200] },
+                { name: "黄新悦", scores: [116, 15.5, 15.5, 22.5, 20, 7, 196.5] },
+                { name: "夏鑫", scores: [132, 12, 14.5, 14.5, 16, 4, 193] },
+                { name: "陈明飞", scores: [122.5, 16.5, 14, 6, 13, 16.5, 188.5] },
+                { name: "邱志豪", scores: [109, 13.5, 16, 19, 17, 14, 188.5] },
+                { name: "刘恒", scores: [113, 15.5, 14, 20, 18, 9, 189.5] },
+                { name: "王梓宇", scores: [108.5, 18.5, 8, 15, 17, 10, 177] },
+                { name: "倪志扬", scores: [103, 12, 5, 14, 25, 14, 173] },
+                { name: "陈浩宇轩", scores: [96, 7.5, 9, 11, 18, 23, 164.5] },
+                { name: "程子家", scores: [89.5, 16.5, 7, 14.5, 16, 17, 160.5] },
+                { name: "李瑾璨", scores: [93, 13.5, 9, 11, 18, 6, 150.5] },
+                { name: "李憬恒", scores: [91, 6, 16.5, 13, 13, 13, 152.5] },
+                { name: "李含旭", scores: [87, 13.5, 7, 8, 16, 20.5, 152] },
+                { name: "陈睿", scores: [81, 19, 8, 14.5, 17, 12.5, 152] },
+                { name: "韩承锦", scores: [83.5, 17, 14.5, 13, 12, 10, 150] },
+                { name: "肖梓奥", scores: [87.5, 15, 18, 7, 14.5, 6, 148] },
+                { name: "周子浩", scores: [92, 16.5, 4, 22.5, 18, 13.5, 166.5] },
+                { name: "夏正杰", scores: [84, 16.5, 10, 13, 20, 23, 166.5] },
+                { name: "彭子越", scores: [105.5, 11, 13, 13, 14, 9, 165.5] },
+                { name: "胡志诚", scores: [69, 10.5, 2, 10, 16, 11, 118.5] },
+                { name: "倪浩禹", scores: [44, 7.5, 9, 10, 7, 6, 83.5] },
+                { name: "尚成杰", scores: [63, 9.5, 12.5, 2, 12, 4, 103] },
+                { name: "刘晨翔", scores: [0, 0, 0, 0, 0, 0, 0] }, // 缺考
+                { name: "张星航", scores: [0, 0, 0, 0, 0, 0, 0] }, // 缺考
+                { name: "龚诗哲", scores: [0, 0, 0, 0, 0, 0, 0] }  // 缺考
+            ],
+            
+            // 2026年1月调考数据
+            exam3: [
+                { name: "吴子童", scores: [192, 6, 24, 26.5, 20, 19, 287.5] },
+                { name: "刘必为", scores: [161.5, 11, 18, 19.5, 17, 19, 246] },
+                { name: "卢涵", scores: [144, 6, 19, 24.5, 16, 18, 227.5] },
+                { name: "杜伟健", scores: [127, 12, 18, 23, 19, 18, 217] },
+                { name: "刘晨翔", scores: [131, 6, 23, 16, 22, 13, 211] },
+                { name: "董致先", scores: [125, 12, 15, 14, 17, 17, 200] },
+                { name: "王梓宇", scores: [124, 6, 16, 18.5, 23.5, 10, 198] },
+                { name: "夏鑫", scores: [116.5, 9, 19, 21, 23.5, 9, 198] },
+                { name: "蒋子轩", scores: [119.5, 3, 11, 19, 22.5, 11, 186] },
+                { name: "刘恒", scores: [108, 6, 10, 21, 26.5, 14, 185.5] },
+                { name: "陈睿", scores: [123.5, 6, 13, 8, 20, 13, 183.5] },
+                { name: "谢正浩", scores: [111.5, 11, 15, 17.5, 14, 13, 182] },
+                { name: "邱志豪", scores: [104, 3, 21, 16, 16, 20, 180] },
+                { name: "倪志扬", scores: [113, 9, 11, 15.5, 17, 12, 177.5] },
+                { name: "周优博", scores: [99, 3, 19, 17.5, 13.5, 14.5, 166.5] },
+                { name: "黄新悦", scores: [96, 3, 19, 11, 20, 13.5, 162.5] },
+                { name: "夏正杰", scores: [105.5, 3, 6, 13.5, 23.5, 10, 161.5] },
+                { name: "彭子越", scores: [92, 6, 15, 10, 18, 18, 159] },
+                { name: "曾鑫", scores: [108.5, 3, 13, 10, 19.5, 5, 159] },
+                { name: "陈浩宇轩", scores: [120.5, 8, 20, 14.5, 13, 14, 190] },
+                { name: "陈明飞", scores: [101.5, 6, 24, 23.5, 22, 11, 188] },
+                { name: "褚智通", scores: [72, 9, 15, 13, 22.5, 15, 146.5] },
+                { name: "李含旭", scores: [84, 0, 16, 8, 18.5, 12, 138.5] },
+                { name: "周子浩", scores: [86, 3, 6, 19, 15.5, 14, 143.5] },
+                { name: "李瑾璨", scores: [137.5, 11, 23, 22.5, 19, 18, 231] },
+                { name: "胡昊", scores: [112.5, 12, 10, 14, 18, 21, 187.5] },
+                { name: "肖梓奥", scores: [66, 6, 8, 14.5, 13.5, 5.5, 113.5] },
+                { name: "胡志诚", scores: [35, 6, 15, 12.5, 7.5, 14, 90] },
+                { name: "倪浩禹", scores: [82.5, 3, 13, 12, 9, 13, 132.5] },
+                { name: "李憬恒", scores: [88.5, 9, 10, 6, 9.5, 8.5, 131.5] },
+                { name: "韩承锦", scores: [68, 6, 14, 15.5, 13, 14, 130.5] },
+                { name: "尚成杰", scores: [62.5, 6, 8, 10, 13, 10, 109.5] },
+                { name: "王运可", scores: [0, 0, 0, 0, 0, 0, 0] }, // 缺考
+                { name: "张星航", scores: [118.5, 0, 13, 22.5, 12, 5, 171] },
+                { name: "龚诗哲", scores: [51, 6, 23, 17.5, 15.5, 10, 123] }
+            ]
+        };
+
+        // 辅助函数：获取学生某次考试成绩（如果不存在则返回null）
+        function getStudentExamData(studentName, examIndex) {
+            const exam = examData[`exam${examIndex}`];
+            const student = exam.find(s => s.name === studentName);
+            return student || null;
+        }
+
+        // 计算排名
+        function calculateRank(examIndex, studentTotal) {
+            const exam = examData[`exam${examIndex}`];
+            if (!exam || exam.length === 0) return '-';
+            
+            // 过滤掉缺考的学生（总分为0）再进行排序
+            const validStudents = exam.filter(s => s.scores[6] > 0);
+            const sorted = [...validStudents].sort((a, b) => b.scores[6] - a.scores[6]);
+            const rank = sorted.findIndex(s => s.scores[6] === studentTotal) + 1;
+            return `${rank}/${validStudents.length}`;
+        }
+
+        // 渲染成绩表格
+        function renderScoreTable(examIndex, studentData) {
+            const rankSpan = document.getElementById(`rank${examIndex}`);
+            const absentSpan = document.getElementById(`absent${examIndex}`);
+            
+            if (!studentData || studentData.scores[6] === 0) {
+                // 缺考情况
+                for (let i = 1; i <= 6; i++) {
+                    const cell = document.getElementById(`s${examIndex}${i}`);
+                    if (cell) cell.textContent = '0';
+                }
+                const totalCell = document.getElementById(`total${examIndex}`);
+                if (totalCell) totalCell.textContent = '0';
+                
+                rankSpan.innerText = '缺考';
+                rankSpan.style.display = 'none';
+                absentSpan.style.display = 'inline-block';
+                return 0;
+            } else {
+                const scores = studentData.scores;
+                for (let i = 1; i <= 6; i++) {
+                    const cell = document.getElementById(`s${examIndex}${i}`);
+                    if (cell) cell.textContent = scores[i-1];
+                }
+                const totalCell = document.getElementById(`total${examIndex}`);
+                if (totalCell) totalCell.textContent = scores[6];
+                
+                const rank = calculateRank(examIndex, scores[6]);
+                rankSpan.innerText = rank;
+                rankSpan.style.display = 'inline-block';
+                absentSpan.style.display = 'none';
+                return scores[6];
+            }
+        }
+
+        // 计算进退步
+        function updateProgress(scores) {
+            const progress1 = document.getElementById('progress1');
+            const progress2 = document.getElementById('progress2');
+            const progress3 = document.getElementById('progress3');
+            
+            const [s1, s2, s3] = scores;
+            
+            if (s1 !== null && s2 !== null) {
+                const diff1 = s2 - s1;
+                progress1.innerText = diff1 > 0 ? `↑${diff1.toFixed(1)}` : diff1 < 0 ? `↓${Math.abs(diff1).toFixed(1)}` : '持平';
+                progress1.className = diff1 > 0 ? 'trend-up' : diff1 < 0 ? 'trend-down' : '';
+            } else {
+                progress1.innerText = '--';
+            }
+            
+            if (s2 !== null && s3 !== null) {
+                const diff2 = s3 - s2;
+                progress2.innerText = diff2 > 0 ? `↑${diff2.toFixed(1)}` : diff2 < 0 ? `↓${Math.abs(diff2).toFixed(1)}` : '持平';
+                progress2.className = diff2 > 0 ? 'trend-up' : diff2 < 0 ? 'trend-down' : '';
+            } else {
+                progress2.innerText = '--';
+            }
+            
+            if (s1 !== null && s3 !== null) {
+                const diff3 = s3 - s1;
+                progress3.innerText = diff3 > 0 ? `↑${diff3.toFixed(1)}` : diff3 < 0 ? `↓${Math.abs(diff3).toFixed(1)}` : '持平';
+                progress3.className = diff3 > 0 ? 'trend-up' : diff3 < 0 ? 'trend-down' : '';
+            } else {
+                progress3.innerText = '--';
+            }
+        }
+
+        // 成绩查询按钮点击事件
+        const queryBtn = document.getElementById('scoreQueryBtn');
+        const studentNameInput = document.getElementById('studentName');
+        const studentPwdInput = document.getElementById('studentPwd');
+        const scoreContainer = document.getElementById('scoreResultContainer');
+        const noResultCard = document.getElementById('noResultCard');
+        const initialPromptCard = document.getElementById('initialPromptCard');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+
+        queryBtn.addEventListener('click', () => {
+            const name = studentNameInput.value.trim();
+            const pwd = studentPwdInput.value.trim();
+            
+            if (!name) {
+                alert('请输入姓名');
+                return;
+            }
+            
+            if (!pwd) {
+                alert('请输入密码');
+                return;
+            }
+            
+            if (pwd !== '123456') {
+                alert('密码错误');
+                return;
+            }
+            
+            if (!class2314Students.includes(name)) {
+                scoreContainer.style.display = 'none';
+                noResultCard.style.display = 'block';
+                initialPromptCard.style.display = 'none';
+                return;
+            }
+            
+            // 获取三次考试成绩
+            const exam1Data = getStudentExamData(name, 1);
+            const exam2Data = getStudentExamData(name, 2);
+            const exam3Data = getStudentExamData(name, 3);
+            
+            // 显示学生信息
+            studentNameDisplay.innerText = name;
+            
+            // 渲染三次成绩
+            const total1 = renderScoreTable(1, exam1Data);
+            const total2 = renderScoreTable(2, exam2Data);
+            const total3 = renderScoreTable(3, exam3Data);
+            
+            // 更新进退步
+            updateProgress([total1, total2, total3]);
+            
+            // 显示结果容器
+            scoreContainer.style.display = 'block';
+            noResultCard.style.display = 'none';
+            initialPromptCard.style.display = 'none';
+        });
+
+        // 考试切换标签
+        document.querySelectorAll('.exam-tab').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                document.querySelectorAll('.exam-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                const examNum = tab.dataset.exam;
+                document.querySelectorAll('.exam-result').forEach(result => result.style.display = 'none');
+                document.getElementById(`exam${examNum}Result`).style.display = 'block';
+            });
+        });
+
+        studentNameInput.value = '';
+        studentPwdInput.value = '';
+
+        // ========= 高频考点卡片生成 =========
+        const faqData = [
+            { question: "建筑施工图中，表示墙体、柱等承重构件位置的线型是什么？", answer: "粗实线。承重构件如墙体、柱子在建筑图中用粗实线绘制，以突出其结构重要性。", subject: "识图" },
+            { question: "影响混凝土强度的最主要因素是什么？", answer: "水泥强度等级和水灰比。水灰比越小、水泥强度越高，混凝土强度越高，这是决定混凝土强度的核心因素。", subject: "材料" },
+            { question: "水准测量中，前后视距相等可以消除什么误差？", answer: "可消除i角误差（视准轴与水准管轴不平行的误差）的影响，提高测量精度。", subject: "测量" },
+            { question: "建设单位在建设工程开工前，应当向哪个部门申请领取施工许可证？", answer: "工程所在地县级以上人民政府建设行政主管部门。施工许可证是开工的法定前提。", subject: "法规" },
+            { question: "卷材防水屋面中，用于防止屋面渗水的关键构造层是什么？", answer: "防水层。防水层是卷材防水屋面的核心功能层，直接承担防渗任务。", subject: "构造" },
+            { question: "点的三面投影中，水平投影与正面投影的关系是什么？", answer: "长对正。水平投影与正面投影在长度方向对齐，符合'长对正、高平齐、宽相等'的投影规律。", subject: "识图" },
+            { question: "通用硅酸盐水泥的技术要求中，不属于必检项目的是什么？", answer: "水化热。必检项目包括细度、凝结时间、安定性，水化热属于选择性检验项目。", subject: "材料" },
+            { question: "使用全站仪进行角度测量时，其直接观测值不包括什么？", answer: "高差。全站仪直接测水平角、竖直角、斜距，高差需通过计算获得。", subject: "测量" },
+            { question: "根据《建设工程质量管理条例》，建设工程发包单位能否迫使承包方以低于成本的价格竞标？", answer: "不得。法律明确禁止发包单位迫使承包方低于成本价竞标，以保障工程质量。", subject: "法规" },
+            { question: "墙体中勒脚的主要作用是什么？", answer: "防潮。勒脚位于墙身与地面交接处，主要防止地面水侵蚀墙体，同时也有美观作用。", subject: "构造" },
+            { question: "在建筑施工图中，定位轴线应用什么线型绘制？", answer: "细单点长画线。定位轴线采用细单点长画线表示，端部画细实线圆并编号。", subject: "识图" },
+            { question: "钢筋拉伸试验中，用于评价其塑性性能的指标是什么？", answer: "伸长率。伸长率反映钢筋断裂前的变形能力，是衡量钢材塑性的重要指标。", subject: "材料" },
+            { question: "测量工作的基本原则之一'从整体到局部'，其主要目的是什么？", answer: "防止误差积累。先控制后碎部，从整体到局部，可有效控制测量误差的传递和积累。", subject: "测量" },
+            { question: "施工企业从事建筑施工活动，必须取得什么证书？", answer: "建筑业企业资质证书。施工企业必须具备相应资质，方可承揽工程施工任务。", subject: "法规" },
+            { question: "钢筋混凝土楼板中，适用于大跨度的是什么类型？", answer: "井式楼板。井式楼板双向受力，空间刚度大，适用于跨度较大的建筑空间。", subject: "构造" }
+        ];
+
+        const container = document.getElementById('faqContainer');
+        if (container) {
+            container.innerHTML = '';
+            faqData.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'faq-card';
+
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'faq-question';
+                const leftSpan = document.createElement('span');
+                leftSpan.innerHTML = `<i class="fas fa-question-circle"></i> ${item.question} <span class="subject-tag">${item.subject}</span>`;
+                const arrowSpan = document.createElement('span');
+                arrowSpan.className = 'arrow';
+                arrowSpan.innerHTML = '▼';
+                questionDiv.appendChild(leftSpan);
+                questionDiv.appendChild(arrowSpan);
+
+                const answerDiv = document.createElement('div');
+                answerDiv.className = 'faq-answer';
+                answerDiv.innerText = item.answer;
+
+                questionDiv.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    questionDiv.classList.toggle('open');
+                    answerDiv.classList.toggle('open');
+                });
+
+                card.appendChild(questionDiv);
+                card.appendChild(answerDiv);
+                container.appendChild(card);
+            });
+
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                const observer = new MutationObserver(mutations => {
+                    mutations.forEach(mut => {
+                        if (mut.attributeName === 'class' && ans.classList.contains('open')) {
+                            ans.style.maxHeight = ans.scrollHeight + 20 + 'px';
+                        } else if (mut.attributeName === 'class' && !ans.classList.contains('open')) {
+                            ans.style.maxHeight = '0';
+                        }
+                    });
+                });
+                observer.observe(ans, { attributes: true });
+            });
+        }
+
+        // ========= 真题下载功能 =========
+        const pdfContents = {
+            nov: `湖北准易教育研究院全省调考2025年建筑技术类11月调考\n\n【单选题】1. 建设单位在建设工程开工前，应当向工程所在地的县级以上人民政府建设行政主管部门申请领取（）。\nA. 建设用地规划许可证 B. 建设工程规划许可证 C. 施工许可证 D. 安全生产许可证\n\n...（共51题，此处省略完整内容）...`,
+            dec: `湖北准易教育研究院全省调考2025年建筑技术类12月调考\n\n【单选题】1. 钢筋混凝土楼板中，适用于大跨度的是（）\nA. 板式楼板 B. 梁板式楼板 C. 无梁楼板 D. 井式楼板\n\n...（共51题，此处省略完整内容）...`,
+            jan: `湖北准易教育研究院全省调考2026年建筑技术类01月调考\n\n【单选题】1. 建筑施工图中，表示墙体、柱等承重构件位置的线型是（）。\nA. 细实线 B. 粗实线 C. 中虚线 D. 点划线\n\n...（共51题，此处省略完整内容）...`
+        };
+
+        function setupDownload(linkId, content, filename) {
+            const link = document.getElementById(linkId);
+            if (link) {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const blob = new Blob([content], { type: 'application/pdf' });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                });
+            }
+        }
+
+        setupDownload('downloadNov', pdfContents.nov, '2025年11月建筑技术类调考真题.pdf');
+        setupDownload('downloadDec', pdfContents.dec, '2025年12月建筑技术类调考真题.pdf');
+        setupDownload('downloadJan', pdfContents.jan, '2026年1月建筑技术类调考真题.pdf');
+
+        // ========= 班务板块切换JS =========
+        const btnSingle = document.getElementById('btnSingleWeek');
+        const btnDouble = document.getElementById('btnDoubleWeek');
+        const panelSingle = document.getElementById('singleWeekPanel');
+        const panelDouble = document.getElementById('doubleWeekPanel');
+
+        if (btnSingle && btnDouble) {
+            btnSingle.addEventListener('click', function() {
+                btnSingle.classList.add('active');
+                btnDouble.classList.remove('active');
+                panelSingle.classList.add('active-panel');
+                panelDouble.classList.remove('active-panel');
+            });
+
+            btnDouble.addEventListener('click', function() {
+                btnDouble.classList.add('active');
+                btnSingle.classList.remove('active');
+                panelDouble.classList.add('active-panel');
+                panelSingle.classList.remove('active-panel');
+            });
+        }
+    })();
+</script>
+</body>
+</html>
